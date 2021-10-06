@@ -1,0 +1,12 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: goserver-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    name: goserver
+    kind: Deployment
+  minReplicas: 1 #ao menos uma réplica aqui (ideal é utilizar 2 no mínimo sempre)
+  maxReplicas: 8 #aqui um limite de réplicas a serem criadas
+  targetCPUUtilizationPercentage: 25 # quando ele chegar nesse percentual ele começa a criar novos pods 
